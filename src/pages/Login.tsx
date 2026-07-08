@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from '../config';
+import { Mail, Lock, Eye, EyeOff, AlertCircle, CheckCircle2 } from "lucide-react";
 
 
 // تعريف واجهة استجابة الخادم لضمان أمان الأنواع
@@ -25,6 +26,7 @@ export default function AdminLogin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -80,41 +82,48 @@ export default function AdminLogin() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center bg-gray-50 px-4 sm:px-6 lg:px-8"
+      className="min-h-screen relative flex items-center justify-center bg-[#0b132b] overflow-hidden px-4 sm:px-6 lg:px-8"
       dir={isRtl ? "rtl" : "ltr"}
     >
-      <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+      {/* عناصر الخلفية المتدرجة والفقاعات اللونية */}
+      <div className="absolute top-[-20%] start-[-10%] w-[60%] h-[60%] rounded-full bg-gradient-to-br from-[#00b4d8]/20 via-[#0077b6]/10 to-transparent blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-[-20%] end-[-10%] w-[60%] h-[60%] rounded-full bg-gradient-to-tr from-[#d32f2f]/15 via-[#ff9800]/5 to-transparent blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-[30%] end-[10%] w-[35%] h-[35%] rounded-full bg-gradient-to-br from-[#00b4d8]/10 via-[#d32f2f]/5 to-transparent blur-[100px] pointer-events-none"></div>
+
+      <div className="relative max-w-md w-full bg-[#1c2541]/40 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-white/10 z-10 transition-all duration-300 hover:border-white/20">
         {/* قسم الشعار والعنوان */}
         <div className="text-center mb-8">
           <div className="flex justify-center mb-6">
             <div className="relative">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#D32F2F]/30 to-red-100 blur-md scale-110"></div>
-              <div className="relative h-24 w-24 rounded-full bg-white border-4 border-[#D32F2F] shadow-xl p-1">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#00b4d8] to-[#d32f2f] opacity-30 blur-md scale-110"></div>
+              <div className="relative h-28 w-28 rounded-full bg-[#0b132b]/95 border-2 border-white/10 shadow-2xl p-1.5 flex items-center justify-center transition-transform hover:scale-105 duration-300">
                 <img
                   src="/images/logo.png"
                   alt="Logo"
-                  className="h-full w-full rounded-full object-cover"
+                  className="h-full w-full rounded-full object-contain"
                 />
               </div>
             </div>
           </div>
-          <h2 className="text-2xl font-bold text-gray-800">
+          <h2 className="text-2xl font-bold text-white tracking-wide">
             {t('login.title', "تسجيل الدخول للإدارة")}
           </h2>
-          <p className="text-sm text-gray-500 mt-2">
+          <p className="text-sm text-gray-400 mt-2">
             {t('login.subtitle', "يرجى إدخال بياناتك للوصول إلى لوحة التحكم")}
           </p>
         </div>
 
         {/* التنبيهات (النجاح أو الخطأ) */}
         {error && (
-          <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm text-center font-medium">
-            {error}
+          <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-200 text-sm flex items-center gap-3">
+            <AlertCircle className="h-5 w-5 shrink-0 text-red-400" />
+            <span className="font-medium">{error}</span>
           </div>
         )}
         {success && (
-          <div className="mb-4 p-3 rounded-lg bg-green-50 border border-green-200 text-green-600 text-sm text-center font-medium">
-            {success}
+          <div className="mb-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-200 text-sm flex items-center gap-3">
+            <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-400" />
+            <span className="font-medium">{success}</span>
           </div>
         )}
 
@@ -123,43 +132,64 @@ export default function AdminLogin() {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-gray-300 mb-2 ms-1"
             >
               {t('login.email', "البريد الإلكتروني")}
             </label>
-            <input
-              id="email"
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#D32F2F] focus:border-[#D32F2F] transition-colors bg-gray-50 focus:bg-white text-gray-900 outline-none"
-              placeholder="name@company.com"
-            />
+            <div className="relative">
+              <div className="absolute inset-y-0 start-0 ps-3.5 flex items-center pointer-events-none text-gray-400">
+                <Mail className="h-5 w-5" />
+              </div>
+              <input
+                id="email"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full ps-11 pe-4 py-3 bg-[#0b132b]/60 border border-white/10 rounded-xl focus:ring-2 focus:ring-[#00b4d8] focus:border-[#00b4d8] focus:bg-[#0b132b]/95 text-white placeholder-gray-500 outline-none transition-all duration-300"
+                placeholder="name@company.com"
+              />
+            </div>
           </div>
 
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-gray-300 mb-2 ms-1"
             >
               {t('login.password', "كلمة المرور")}
             </label>
-            <input
-              id="password"
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#D32F2F] focus:border-[#D32F2F] transition-colors bg-gray-50 focus:bg-white text-gray-900 outline-none"
-              placeholder="••••••••"
-            />
+            <div className="relative">
+              <div className="absolute inset-y-0 start-0 ps-3.5 flex items-center pointer-events-none text-gray-400">
+                <Lock className="h-5 w-5" />
+              </div>
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full ps-11 pe-11 py-3 bg-[#0b132b]/60 border border-white/10 rounded-xl focus:ring-2 focus:ring-[#00b4d8] focus:border-[#00b4d8] focus:bg-[#0b132b]/95 text-white placeholder-gray-500 outline-none transition-all duration-300"
+                placeholder="••••••••"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 end-0 pe-3.5 flex items-center text-gray-400 hover:text-white transition-colors"
+              >
+                {showPassword ? (
+                  <EyeOff className="h-5 w-5" />
+                ) : (
+                  <Eye className="h-5 w-5" />
+                )}
+              </button>
+            </div>
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-[#D32F2F] hover:bg-[#B71C1C] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D32F2F] transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+            className="w-full flex justify-center items-center py-3.5 px-4 border border-transparent rounded-xl shadow-lg text-sm font-bold text-white bg-gradient-to-r from-[#0077b6] via-[#00b4d8] to-[#d32f2f] hover:from-[#0096c7] hover:to-[#b71c1c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0b132b] focus:ring-[#00b4d8] transition-all duration-300 transform active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
           >
             {loading ? (
               <span className="flex items-center gap-2">
@@ -194,3 +224,4 @@ export default function AdminLogin() {
     </div>
   );
 }
+
