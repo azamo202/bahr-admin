@@ -1,13 +1,14 @@
 {
   "sidebar": {
     "dashboard": "داشبۆرد",
+    "homeSections": "بەشەکانی سەرەکی",
     "products": "بەرهەمەکان",
     "categories": "پۆلەکان",
     "brands": "براندەکان",
     "media": "پەیوەندی و گارانتی",
     "admins" : "بەڕێوەبەر",
     "settings": "ڕێکخستنەکان",
-    "catalog": "کۆمپانیای چرانی"
+    "catalog": "بحر الألوان"
   },
   "topbar": {
     "search": "گەڕان...",

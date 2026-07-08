@@ -4,7 +4,7 @@ import en from './translations/en.json';
 import ar from './translations/ar.json';
 import ku from './translations/ku.json';
 
-const savedLang = localStorage.getItem('chrani-lang') || 'en';
+const savedLang = localStorage.getItem('bahr-lang') || 'en';
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -23,7 +23,7 @@ export const isRTL = (lang: string) => RTL_LANGUAGES.includes(lang);
 
 export const changeLanguage = (lang: string) => {
   i18n.changeLanguage(lang);
-  localStorage.setItem('chrani-lang', lang);
+  localStorage.setItem('bahr-lang', lang);
   document.documentElement.dir = isRTL(lang) ? 'rtl' : 'ltr';
   document.documentElement.lang = lang;
 };

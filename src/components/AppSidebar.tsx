@@ -85,8 +85,8 @@ export function AppSidebar() {
                 'flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14px] font-medium transition-all duration-200 group relative',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sidebar-primary', // دعم لوحة المفاتيح
                 isActive
-                  ? 'bg-sidebar-accent text-sidebar-primary shadow-sm'
-                  : 'text-sidebar-muted hover:bg-sidebar-accent/60 hover:text-sidebar-foreground'
+                  ? 'bg-sidebar-accent text-white shadow-sm'
+                  : 'text-white/70 hover:bg-sidebar-accent/60 hover:text-white'
               )}
             >
               {/* Active Indicator Line */}
@@ -101,8 +101,8 @@ export function AppSidebar() {
                 className={cn(
                   'h-5 w-5 shrink-0 transition-all duration-200', 
                   isActive 
-                    ? 'text-sidebar-primary' 
-                    : 'text-sidebar-muted group-hover:text-sidebar-foreground group-hover:scale-110' // تأثير تكبير بسيط عند التمرير
+                    ? 'text-white' 
+                    : 'text-white/70 group-hover:text-white group-hover:scale-110' // تأثير تكبير بسيط عند التمرير
                 )} 
               />
               
@@ -134,7 +134,7 @@ export function AppSidebar() {
       <button
         onClick={toggleCollapse}
         aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-        className="h-12 flex items-center justify-center border-t border-sidebar-border text-sidebar-muted hover:text-sidebar-foreground hover:bg-sidebar-accent/50 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-sidebar-primary"
+        className="h-12 flex items-center justify-center border-t border-sidebar-border text-white/70 hover:text-white hover:bg-sidebar-accent/50 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-sidebar-primary"
       >
         <ChevronLeft 
           className={cn(

@@ -7,8 +7,8 @@ export const getValidImageUrl = (path: string | null) => {
 
   // إذا كان الرابط يحتوي على النطاق الخاطئ أو نطاق الباك إند، نقوم بإزالته لتنظيف المسار وإعادة بنائه بشكل صحيح
   if (cleanPath.startsWith('http://') || cleanPath.startsWith('https://')) {
-    if (cleanPath.includes('dashboard.chranico.com') || cleanPath.includes('api.chranico.com')) {
-      cleanPath = cleanPath.replace(/^https?:\/\/(dashboard|api)\.chranico\.com\/(storage\/)?/, '');
+    if (cleanPath.includes('dashboard.bahralalwan.com') || cleanPath.includes('backend.bahralalwan.com')) {
+      cleanPath = cleanPath.replace(/^https?:\/\/(dashboard|backend)\.bahralalwan\.com\/(storage\/)?/, '');
     } else {
       // إذا كان رابطاً خارجياً تماماً، نرجعه كما هو
       return cleanPath;
@@ -16,7 +16,7 @@ export const getValidImageUrl = (path: string | null) => {
   }
 
   // 1. تحديد رابط الباك إند بشكل صريح
-  const backendUrl = 'https://api.chranico.com';
+  const backendUrl = 'https://backend.bahralalwan.com';
 
   // 2. تنظيف المسار من أي أخطاء (إزالة storage أو products المكررة)
   cleanPath = cleanPath.replace(/^storage\//, ''); // يحذف storage/ من البداية لو وجدت
