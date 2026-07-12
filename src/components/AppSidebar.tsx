@@ -9,9 +9,12 @@ import {
   Settings,
   ChevronLeft, // سنحتاج فقط لسهم واحد وسنقوم بتدويره
   Users,
+  MessageCircle,
+  BarChart,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useState, useEffect } from 'react';
+import { toast } from 'sonner';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { LayoutTemplate } from "lucide-react"; // أو أي أيقونة تفضلها
 
@@ -23,6 +26,8 @@ const navItems = [
   { key: 'brands', icon: Tag, path: '/brands' },
   { key: 'media', icon: Image, path: '/media' },
   { key: 'admins', icon: Users, path: '/AdminsPage' },
+  { key: 'reviews', icon: MessageCircle, path: '/reviews', disabled: true },
+  { key: 'stats', icon: BarChart, path: '/stats' },
   { key: 'settings', icon: Settings, path: '/settings' },
 ];
 
@@ -80,13 +85,20 @@ export function AppSidebar() {
             <Link
               key={item.key}
               to={item.path}
+              onClick={(e) => {
+                if (item.disabled) {
+                  e.preventDefault();
+                  toast.info(t('sidebar.sectionDisabled', 'هذا القسم غير مفعل في الوقت الحالي'));
+                }
+              }}
               aria-current={isActive ? 'page' : undefined}
               className={cn(
                 'flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14px] font-medium transition-all duration-200 group relative',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sidebar-primary', // دعم لوحة المفاتيح
-                isActive
+                item.disabled && 'opacity-50 cursor-not-allowed',
+                !item.disabled && isActive
                   ? 'bg-sidebar-accent text-white shadow-sm'
-                  : 'text-white/70 hover:bg-sidebar-accent/60 hover:text-white'
+                  : !item.disabled && 'text-white/70 hover:bg-sidebar-accent/60 hover:text-white'
               )}
             >
               {/* Active Indicator Line */}

@@ -4,9 +4,23 @@ import { PageHeader } from '@/components/shared';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Phone, Save, MessageCircle, Mail, Facebook, Instagram, Youtube, Globe, Plus, Trash2 } from 'lucide-react';
+import { Phone, Save, MessageCircle, Mail, Facebook, Instagram, Youtube, Globe, Plus, Trash2, BarChart } from 'lucide-react';
 import { toast } from 'sonner';
 import { API_BASE_URL } from '@/config';
+
+interface StatItem {
+  valueAr: string;
+  valueEn: string;
+  labelAr: string;
+  labelEn: string;
+  labelKu: string;
+}
+
+interface ReviewItem {
+  textAr: string;
+  textEn: string;
+  textKu: string;
+}
 
 export default function SettingsPage() {
   const { t, i18n } = useTranslation();
@@ -18,6 +32,8 @@ export default function SettingsPage() {
     facebook: string;
     instagram: string;
     youtube: string;
+    stats: StatItem[];
+    reviews: ReviewItem[];
   }>({
     phone: [''],
     whatsapp: '',
@@ -26,6 +42,8 @@ export default function SettingsPage() {
     facebook: '',
     instagram: '',
     youtube: '',
+    stats: [],
+    reviews: [],
   });
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -63,6 +81,8 @@ export default function SettingsPage() {
             facebook: data.settings.facebook || '',
             instagram: data.settings.instagram || '',
             youtube: data.settings.youtube || '',
+            stats: Array.isArray(data.settings.stats) ? data.settings.stats : [],
+            reviews: Array.isArray(data.settings.reviews) ? data.settings.reviews : [],
           });
         }
       } catch (error) {
@@ -230,6 +250,9 @@ export default function SettingsPage() {
             </div>
           </div>
         </div>
+
+
+
 
         {/* Social Media */}
         <div className="bg-card border rounded-2xl shadow-sm overflow-hidden transition-all hover:shadow-md">

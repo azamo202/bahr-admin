@@ -16,6 +16,8 @@ const CategoryProductsPage = lazy(() => import("./pages/CategoryProductsPage"));
 const BrandsPage = lazy(() => import("./pages/BrandsPage"));
 const MediaPage = lazy(() => import("./pages/MediaPage"));
 const SettingsPage = lazy(() => import("./pages/SettingsPage"));
+const ReviewsPage = lazy(() => import("./pages/ReviewsPage"));
+const StatsPage = lazy(() => import("./pages/StatsPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Login = lazy(() => import("./pages/Login"));
 const AdminsPage = lazy(() => import("./pages/AdminsPage"));
@@ -84,6 +86,8 @@ const App = () => (
               <Route path="/brands" element={<BrandsPage />} />
               <Route path="/media" element={<MediaPage />} />
               <Route path="/settings" element={<SettingsPage />} />
+              <Route path="/reviews" element={<ReviewsPage />} />
+              <Route path="/stats" element={<StatsPage />} />
               <Route path="/home-sections" element={<HomeSectionsPage />} />
             </Route>
             <Route path="*" element={<Suspense fallback={<Loading />}><NotFound /></Suspense>} />
